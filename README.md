@@ -10,7 +10,8 @@ Complete um crud do reprogramaflix e do to-do-server.
 
 **No {reprogramaflix}:**
 
-**{GET} /filmes** - Visualizar apresentação do projeto;
+**{GET} /filmes** - Visualizar apresentação do projeto
+
 **{GET} /filmes/todos** - Visualizar todos os filmes;
 
 **{GET} /filmes/:id** - Visualizar filme por id;
