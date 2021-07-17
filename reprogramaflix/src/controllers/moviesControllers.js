@@ -122,7 +122,7 @@ const deletMovie = (request, response) => { //deletar movie por id
 }
 //substituir todo o item da lista do json
 const replaceMovie = (request, response) => {
-    const requestedId = request.params.id
+    let requestedId = request.params.id
     let movieAtualizado = request.body
 
     let filteredId = movies.find(movie => movie.id == requestedId)
@@ -145,6 +145,7 @@ const replaceMovie = (request, response) => {
     }
 
     const indice = movies.indexOf(filteredId)
+
     movies.splice(indice, 1, updateMovie)
 
     response.status(200).send({
@@ -154,32 +155,34 @@ const replaceMovie = (request, response) => {
 }
 //atualizar apenas o titulo
 const updateTitle = (request, response) => {
-    const requestedId = request.params.id
+    let requestedId = request.params.id
     let newTitle = request.body.title
 
-    const filteredId = movies.find(movie => movie.id == requestedId)
+    let filteredId = movies.find(movie => movie.id == requestedId)
+
     filteredId.title = newTitle
 
     response.status(200).send({
-        "message": "Titulo atualizado com sucesso!"
+        "message": "Titulo atualizado com sucesso!",
+        filteredId
     })
 
 }
 //atualizar qualquer outra parte
-// const updateAnyThing = (request, response) => {
-//     let requestedId = request.params.id
-//     let filteredId = movies.find(movie => movie.id == requestedId)
+const updateAnyThing = (request, response) => {
+    let requestedId = request.params.id
+    let filteredId = movies.find(movie => movie.id == requestedId)
 
-//     let update = request.body
-//     let keyList = Object.keys(update) //substituiçao da chave enviada para chave atual
+    let update = request.body
+    let keyList = Object.keys(update) //substituiçao da chave enviada para chave atual
 
-//     keyList.forEach((key) => {
-//         filteredId[key] = update[key]
-//         })
+    keyList.forEach((key) => {
+        filteredId[key] = update[key]
+        })
 
-//     response.status(200).send({ "message": "Informação do filme atualizado com sucesso!", filteredId})
-// }
+    response.status(200).send({ "message": "Informação do filme atualizado com sucesso!", filteredId})
+}
 
 module.exports = {
-    home, getAll, getById, getByTitle, getByGenre,  criateMovie, deletMovie, replaceMovie,  updateTitle
+    home, getAll, getById, getByTitle, getByGenre,  criateMovie, deletMovie, replaceMovie,  updateTitle, updateAnyThing
 } 
