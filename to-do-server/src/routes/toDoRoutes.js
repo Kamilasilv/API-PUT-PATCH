@@ -12,7 +12,6 @@ router.delete("/:id", controller.deleteTask)
 router.put("/:id", controller.replaceTask)
 
 router.patch("/:id", controller.updateTitle)
-
-//router.patch("/:id", controller.updateAnyThing)
+router.patch("/atualizar/:id", controller.updateAnyThing)
 
 module.exports = router

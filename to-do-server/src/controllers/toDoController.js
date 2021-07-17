@@ -48,15 +48,16 @@ const deleteTask = (request, response) => {
     }])
 
 }
-const replaceTask = (request, response) => {
+const replaceTask = (request, response) => { //testar no postman
      const idRequerido = request.params.id
      let taskFromBody = request.body
-     const tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
+
+     let tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
 
      let updateTask = {
-         "id": idRequerido.id,
-         "dataInclusao": idRequerido.dataInclusao,
-         "concluido": idRequerido.concluido,
+         "id": tarefaFiltrada.id,
+         "dataInclusao": tarefaFiltrada.dataInclusao,
+         "concluido": tarefaFiltrada.concluido,
          "descricao": taskFromBody.descricao,
          "nomeColaborador": taskFromBody.nomeColaboradorRequirido
      }
@@ -71,30 +72,32 @@ const replaceTask = (request, response) => {
 const updateTitle = (request, response) => {
     const idRequerido = request.params.id
     let newdescricao = request.body.descricao
-    const tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
+
+    let tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
 
     tarefaFiltrada.descricao = newdescricao
+
     response.status(200).send({
         "message": "Descrição da tarefa atualizada com sucesso!",
         tarefaFiltrada
     })
 }
-// const updateAnyThing = (request, response) => {
-//     const idRequerido = request.params.id 
-//     const tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
+const updateAnyThing = (request, response) => {
+    let idRequerido = request.params.id 
+    let update = request.body
+    let tarefaFiltrada = tarefasJson.find(tarefa => tarefa.id == idRequerido)
 
-//     let update = request.body
+    let keyList = Object.keys(update)
 
-//     let keyList = Object.keys(tarefaFiltrada)
-//     keyList.forEach((key) => {
-//         tarefaFiltrada[key] = update[key]
-//     })
+    keyList.forEach((key) => {
+        tarefaFiltrada[key] = update[key]
+    })
     
-//     response.status(200).send({
-//         "message": "Informação atualizada com sucesso.",
-//         tarefaFiltrada
-//     })
-// }
+    response.status(200).send({
+        "message": "Informação atualizada com sucesso.",
+        tarefaFiltrada
+    })
+}
 
 module.exports = {
     getAll,
@@ -103,4 +106,5 @@ module.exports = {
     deleteTask,
     replaceTask,
     updateTitle,
+    updateAnyThing
 }
