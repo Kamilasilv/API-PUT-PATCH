@@ -16,6 +16,6 @@ router.put("/:id" , controller.replaceMovie)
 
 router.patch("/:id", controller.updateTitle)
 
-//router.patch("/:id", controller.updateAnyThing)
+router.patch("/atualizar/:id", controller.updateAnyThing)
 
 module.exports = router
