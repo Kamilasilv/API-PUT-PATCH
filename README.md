@@ -13,9 +13,6 @@ Complete um crud do reprogramaflix e do to-do-server.
 ### **No {reprogramaflix}:** :arrow_forward:
 
 
-**{GET} /filmes** 
-- Visualizar apresentação do projeto;
-
 **{GET} /filmes/:id** 
 - Visualizar filme por id;
 
